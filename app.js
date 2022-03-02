@@ -2,19 +2,18 @@
 const loadData = () => {
    const field = document.getElementById('search-field') 
    const fieldValue = field.value
-
    if( fieldValue.toLowerCase() === 'samsung' ||     fieldValue.toLowerCase() === 'oppo' || fieldValue.toLowerCase() === 'huawei' || fieldValue.toLowerCase() == 'iphone'){
-
+      // error message
       document.getElementById('errorMessage1').style.display='none'
       document.getElementById('errorMessage2').style.display='none'
       const url = ` https://openapi.programming-hero.com/api/phones?search=${fieldValue}`
-      // console.log(url)
       fetch(url)
        .then(res => res.json())
        .then(datas => displayData(datas.data.slice(0,20)))
 
        // fieldValue clean 
-       field.value=''
+      //  field.value=''
+
       // spinner display block
        document.getElementById('spinner-div').style.display = 'block'
 
@@ -23,12 +22,12 @@ const loadData = () => {
        resultsArea.textContent=''
 
        // clean details area
-         const detailsArea = document.getElementById('detalis-area')
-         detailsArea.textContent = ''
+       const detailsArea = document.getElementById('detalis-area')
+       detailsArea.textContent = ''
 
          // clean show  all area
-      const showArea = document.getElementById('showAll-area')
-      showArea.textContent = ''
+       const showArea = document.getElementById('showAll-area')
+       showArea.textContent = ''
 
        //  show all button clean 
        const show = document.getElementById('allPhones-button')
@@ -45,20 +44,20 @@ const loadData = () => {
       const resultsArea = document.getElementById('results-area')
       resultsArea.textContent = ''
 
+       //  clean details area value
+      const detailsArea = document.getElementById('detalis-area')
+      detailsArea.textContent=''
+      
       // clean show area
       const showArea = document.getElementById('showAll-area')
       showArea.textContent = ''
 
-         //  clean details area value
-      const detailsArea = document.getElementById('detalis-area')
-      detailsArea.textContent=''
-
+        //  show all button clean 
+        const show = document.getElementById('allPhones-button')
+        show.style.display='none'
+        
        // clean spinner 
        document.getElementById('spinner-div').style.display = 'none'
-
-      //  show all button clean 
-      const show = document.getElementById('allPhones-button')
-      show.style.display='none'
    }
    else if(fieldValue.toLowerCase() !== 'apple' || fieldValue.toLowerCase() !== 'samsung' || fieldValue.toLowerCase() !== 'oppo' || fieldValue.toLowerCase() !== 'huawei' || fieldValue.toLowerCase() !== 'iphone'){
       // error message one
@@ -70,29 +69,26 @@ const loadData = () => {
       const resultsArea = document.getElementById('results-area')
       resultsArea.textContent = ''
 
+       //  clean details area 
+       const detailsArea = document.getElementById('detalis-area')
+       detailsArea.textContent=''
+
       // clean show area
       const showArea = document.getElementById('showAll-area')
       showArea.textContent = ''
 
-      //  clean details area 
-      const detailsArea = document.getElementById('detalis-area')
-      detailsArea.textContent=''
-
-      // clean spinner 
-      document.getElementById('spinner-div').style.display = 'none'
-
       //  show all button clean 
       const show = document.getElementById('allPhones-button')
       show.style.display='none'
-   }
-   
+
+      // clean spinner 
+      document.getElementById('spinner-div').style.display = 'none'
+   }  
 }
 
 // display phones 
 const displayData = phones => {
-   //  console.log(phones)
     const resultsArea = document.getElementById('results-area')
-      const detailsArea = document.getElementById('detalis-area')
     phones?.forEach(phone => {
           const div = document.createElement('div')
           div.classList.add('col-lg-4')
@@ -125,11 +121,12 @@ const detailsButton = detail => {
      .then(res => res.json())
      .then(datas => loadDetails(datas.data))
 }
+
 // phone Details
  const loadDetails = phones => {
      const detailsArea = document.getElementById('detalis-area')
       detailsArea.textContent=''
-    
+    // create detalis div 
      const div = document.createElement('div')
      div.classList.add('col-lg-4')
      div.classList.add('p-2')
@@ -146,9 +143,6 @@ const detailsButton = detail => {
                         <h6>Memory: ${phones.mainFeatures.storage.slice(0,5)}</h6>
                         <h6>Display Size: ${phones.mainFeatures.displaySize.slice(0,10)}</h6>
 
-                        <h5 class="fw-bold">Sensor :</h5>
-                      
-
                         <h5 class="fw-bold"> Other Feature :</h5>
                         <h6> Bluetooth: ${phones.others?.Bluetooth? phones.others.Bluetooth:'No'}</h6>
                         <h6>GPS: ${phones.others?.GPS?phones.others.GPS:'No'}</h6>
@@ -162,14 +156,15 @@ const detailsButton = detail => {
      `
      detailsArea.appendChild(div)
  }
+
 //  show all button
  const showAllPhones = () => {
-   const field = document.getElementById('search-field') 
-   const fieldValue = field.value
-   const url = ` https://openapi.programming-hero.com/api/phones?search=${fieldValue}`
-   fetch(url)
-    .then(res => res.json())
-    .then(datas =>displayAll(datas.data.slice(20,datas.length)))
+    const field = document.getElementById('search-field') 
+    const fieldValue = field.value
+    const url = ` https://openapi.programming-hero.com/api/phones?search=${fieldValue}`
+    fetch(url)
+     .then(res => res.json())
+     .then(datas =>displayAll(datas.data.slice(20,datas.length)))
 
     // clear field
     field.value = ''
@@ -177,10 +172,7 @@ const detailsButton = detail => {
 
 // show all 
 const displayAll = phoneArray => {
-   // console.log(phoneArray)
       const showArea = document.getElementById('showAll-area')
-      const detailsArea = document.getElementById('detalis-area')
-      detailsArea.textContent = ''
       phoneArray?.forEach(phone => {
        const div = document.createElement('div')
        div.classList.add('col-lg-4')
