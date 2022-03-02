@@ -2,10 +2,13 @@
  #errorMessage1{
      display:none;
  } 
+ #errorMessage2{
+     display:none;
+ } 
  /* phone img size */
  #phone-img{
      height: 500px;
-     width: 360px;
+     width: fluid;
  }
 #details-button{
     padding-left: 50px;
@@ -14,6 +17,8 @@
     padding-bottom: 10px;
     border-radius: 30px;
 }
+
+
 /* card */
  .card1{
      height: 699px;
@@ -26,4 +31,16 @@
 /*  spinner */
 #spinner{
     width: 500px ;
+}
+
+
+/* allPhones-button */
+#allPhones-button{
+    margin-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 30px;
+    display: none;
 }
