@@ -64,6 +64,7 @@ const loadData = () => {
       document.getElementById('errorMessage1').style.display='none'
          // error message two
       document.getElementById('errorMessage2').style.display='block'
+      // clean field value
       field.value = ''
       // clean resultsArea 
       const resultsArea = document.getElementById('results-area')
@@ -88,6 +89,7 @@ const loadData = () => {
 
 // display phones 
 const displayData = phones => {
+   // console.log(phones)
     const resultsArea = document.getElementById('results-area')
     phones?.forEach(phone => {
           const div = document.createElement('div')
@@ -124,6 +126,7 @@ const detailsButton = detail => {
 
 // phone Details
  const loadDetails = phones => {
+   //  console.log(phones.mainFeatures.sensors[0])
      const detailsArea = document.getElementById('detalis-area')
       detailsArea.textContent=''
     // create detalis div 
@@ -143,6 +146,7 @@ const detailsButton = detail => {
                         <h6>Memory: ${phones.mainFeatures.storage.slice(0,5)}</h6>
                         <h6>Display Size: ${phones.mainFeatures.displaySize.slice(0,10)}</h6>
 
+
                         <h5 class="fw-bold"> Other Feature :</h5>
                         <h6> Bluetooth: ${phones.others?.Bluetooth? phones.others.Bluetooth:'No'}</h6>
                         <h6>GPS: ${phones.others?.GPS?phones.others.GPS:'No'}</h6>
@@ -156,6 +160,9 @@ const detailsButton = detail => {
      `
      detailsArea.appendChild(div)
  }
+
+//  <h5 class="fw-bold">Sensor : ${phones.mainFeatures.sensors}</h5>
+
 
 //  show all button
  const showAllPhones = () => {
@@ -172,6 +179,7 @@ const detailsButton = detail => {
 
 // show all 
 const displayAll = phoneArray => {
+   // console.log(phoneArray)
       const showArea = document.getElementById('showAll-area')
       phoneArray?.forEach(phone => {
        const div = document.createElement('div')
