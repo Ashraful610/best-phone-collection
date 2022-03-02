@@ -1,4 +1,4 @@
-//    load data from server
+//    -------load data from server-----
 const loadData = () => {
    const field = document.getElementById('search-field') 
    const fieldValue = field.value
@@ -10,9 +10,6 @@ const loadData = () => {
       fetch(url)
        .then(res => res.json())
        .then(datas => displayData(datas.data.slice(0,20)))
-
-       // fieldValue clean 
-      //  field.value=''
 
       // spinner display block
        document.getElementById('spinner-div').style.display = 'block'
@@ -87,7 +84,7 @@ const loadData = () => {
    }  
 }
 
-// display phones 
+// --------------------------display phones-------------- 
 const displayData = phones => {
    // console.log(phones)
     const resultsArea = document.getElementById('results-area')
@@ -116,7 +113,7 @@ const displayData = phones => {
     });   
 }
 
-// details button
+// ------------------details button-------------------
 const detailsButton = detail => {
     const url = `  https://openapi.programming-hero.com/api/phone/${detail}`
     fetch(url)
@@ -124,8 +121,9 @@ const detailsButton = detail => {
      .then(datas => loadDetails(datas.data))
 }
 
-// phone Details
+//------------------------ phone Details----------------
  const loadDetails = phones => {
+    console.log(phones)
    //  console.log(phones.mainFeatures.sensors[0])
      const detailsArea = document.getElementById('detalis-area')
       detailsArea.textContent=''
@@ -142,8 +140,8 @@ const detailsButton = detail => {
                         <h5 class="card-title">  Release Date : ${phones.releaseDate?phones.releaseDate:' No Release Date found'}</h5>
 
                         <h5 class="fw-bold">Main Feature :</h5>
-                        <h6>RAM: ${phones.mainFeatures.memory.substr(6,4)}</h6>
-                        <h6>Memory: ${phones.mainFeatures.storage.slice(0,5)}</h6>
+                        <h6>RAM: ${phones.mainFeatures.memory.substr(5,4)}</h6>
+                        <h6>Memory: ${phones.mainFeatures.memory.slice(0,5)}</h6>
                         <h6>Display Size: ${phones.mainFeatures.displaySize.slice(0,10)}</h6>
 
 
@@ -161,10 +159,9 @@ const detailsButton = detail => {
      detailsArea.appendChild(div)
  }
 
-//  <h5 class="fw-bold">Sensor : ${phones.mainFeatures.sensors}</h5>
 
 
-//  show all button
+//  ---------------------show all button---------------
  const showAllPhones = () => {
     const field = document.getElementById('search-field') 
     const fieldValue = field.value
@@ -177,7 +174,7 @@ const detailsButton = detail => {
     field.value = ''
 }
 
-// show all 
+// ------------------show all----------------
 const displayAll = phoneArray => {
    // console.log(phoneArray)
       const showArea = document.getElementById('showAll-area')
