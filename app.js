@@ -3,7 +3,7 @@ const loadData = () => {
    const field = document.getElementById('search-field') 
    const fieldValue = field.value
 
-   if(fieldValue.toLowerCase() === 'apple' || fieldValue.toLowerCase() === 'samsung' ||     fieldValue.toLowerCase() === 'oppo' || fieldValue.toLowerCase() === 'huawei' || fieldValue.toLowerCase() == 'iphone'){
+   if( fieldValue.toLowerCase() === 'samsung' ||     fieldValue.toLowerCase() === 'oppo' || fieldValue.toLowerCase() === 'huawei' || fieldValue.toLowerCase() == 'iphone'){
 
       document.getElementById('errorMessage1').style.display='none'
       document.getElementById('errorMessage2').style.display='none'
@@ -13,8 +13,27 @@ const loadData = () => {
        .then(res => res.json())
        .then(datas => displayData(datas.data.slice(0,20)))
 
+       // fieldValue clean 
+       field.value=''
       // spinner display block
        document.getElementById('spinner-div').style.display = 'block'
+
+       // clean result area
+       const resultsArea = document.getElementById('results-area')
+       resultsArea.textContent=''
+
+       // clean details area
+         const detailsArea = document.getElementById('detalis-area')
+         detailsArea.textContent = ''
+
+         // clean show  all area
+      const showArea = document.getElementById('showAll-area')
+      showArea.textContent = ''
+
+       //  show all button clean 
+       const show = document.getElementById('allPhones-button')
+       show.style.display='none'
+
    }
    else if(fieldValue === ''){
       // error message one
@@ -73,9 +92,7 @@ const loadData = () => {
 const displayData = phones => {
    //  console.log(phones)
     const resultsArea = document.getElementById('results-area')
-    resultsArea.textContent=''
       const detailsArea = document.getElementById('detalis-area')
-      detailsArea.textContent = ''
     phones?.forEach(phone => {
           const div = document.createElement('div')
           div.classList.add('col-lg-4')
@@ -152,7 +169,7 @@ const detailsButton = detail => {
    const url = ` https://openapi.programming-hero.com/api/phones?search=${fieldValue}`
    fetch(url)
     .then(res => res.json())
-    .then(datas =>displayAll(datas.data.slice(20,100)))
+    .then(datas =>displayAll(datas.data.slice(20,datas.length)))
 
     // clear field
     field.value = ''
@@ -160,10 +177,11 @@ const detailsButton = detail => {
 
 // show all 
 const displayAll = phoneArray => {
+   // console.log(phoneArray)
       const showArea = document.getElementById('showAll-area')
       const detailsArea = document.getElementById('detalis-area')
       detailsArea.textContent = ''
-    phoneArray?.forEach(phone => {
+      phoneArray?.forEach(phone => {
        const div = document.createElement('div')
        div.classList.add('col-lg-4')
        div.classList.add('p-2')
@@ -179,6 +197,8 @@ const displayAll = phoneArray => {
             </div>
          `
          showArea.appendChild(div)
-})
-    document.getElementById('allPhones-button').style.display= 'none'
+   })
+   document.getElementById('allPhones-button').style.display= 'none'
 }
+   
+
